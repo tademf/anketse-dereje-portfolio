@@ -14,99 +14,183 @@ export default function Hero() {
       setText(fullText.slice(0, i));
       i++;
       if (i > fullText.length) {
-        setTimeout(() => { i = 0; }, 2000);
+        setTimeout(() => { i = 0; }, 2000); // Pause at the end
       }
     }, 100);
     return () => clearInterval(timer);
   }, []);
 
   const handleDownload = () => {
-    toast.info("Resume download started!");
+    toast.info("Resume download started!", {
+      description: "Fetching the latest version of my CV...",
+    });
   };
 
   return (
-    <section id="home" className="relative min-h-[90vh] pt-20 lg:pt-0 flex items-center bg-white dark:bg-gray-950 transition-colors overflow-hidden">
-      <div className="container mx-auto px-4 relative z-10">
-        {/* 'flex-row' ensures they stay side-by-side even on small phones */}
-        <div className="flex flex-row items-center justify-between gap-2 md:gap-12">
+    <section 
+      id="home" 
+      className="relative min-h-screen pt-28 pb-12 lg:pt-0 lg:pb-0 flex items-center justify-center bg-white dark:bg-gray-950 transition-colors overflow-hidden"
+    >
+      {/* Animated Gradient Background */}
+      <div className="absolute inset-0 opacity-20 dark:opacity-10 animate-gradient bg-gradient-to-br from-blue-400 via-purple-500 to-blue-600 -z-10" />
+      
+      {/* Floating Icons */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <motion.div 
+          animate={{ y: [0, -20, 0], rotate: [0, 10, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[20%] left-[10%] text-blue-500/20"
+        >
+          <Heart size={64} />
+        </motion.div>
+        <motion.div 
+          animate={{ y: [0, 20, 0], rotate: [0, -10, 0] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-[20%] right-[15%] text-blue-600/20"
+        >
+          <Stethoscope size={80} />
+        </motion.div>
+        <motion.div 
+          animate={{ x: [0, 15, 0], y: [0, -15, 0] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[15%] right-[20%] text-blue-400/20"
+        >
+          <Activity size={56} />
+        </motion.div>
+      </div>
+
+      <div className="container-custom relative z-10 px-4">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-16">
           
-          {/* Left Side: Text Content (60% width on mobile) */}
-          <div className="w-[65%] lg:w-1/2 text-left space-y-3 md:space-y-5">
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
+          {/* Text Content */}
+          <div className="lg:text-left text-center lg:w-1/2 order-2 lg:order-1">
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-4 tracking-tight leading-tight"
             >
-              <h1 className="text-xl md:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
-                Hi, I’m <span className="text-blue-600 block md:inline">Anketse Dereje</span>
-              </h1>
-              <div className="flex flex-wrap gap-1 text-[8px] md:text-[11px] font-semibold tracking-wider uppercase text-blue-500 mt-1">
-                <span>Final Year</span>
-                <span className="text-gray-300">|</span>
-                <span>2026 Grad</span>
-              </div>
+              Hi, I’m <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-500 to-blue-600 dark:from-blue-400 dark:via-indigo-300 dark:to-blue-400 animate-gradient-text">Anketse Dereje</span>
+            </motion.h1>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="flex flex-wrap justify-center lg:justify-start gap-2 mb-6"
+            >
+              {["Final Year Student", "2026 Graduate", "Debark University"].map((tag) => (
+                <span key={tag} className="px-3 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-[10px] font-bold uppercase tracking-wider rounded-full border border-blue-100 dark:border-blue-800">
+                  {tag}
+                </span>
+              ))}
             </motion.div>
 
-            <div className="h-4 md:h-6">
-              <p className="text-[10px] md:text-lg font-medium text-gray-700 dark:text-gray-300 border-l-2 border-blue-600 pl-2 md:pl-3">
-                {text}<span className="animate-pulse">|</span>
+            <div className="h-10 mb-8">
+              <p className="text-lg md:text-2xl font-bold font-poppins bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-500 via-pink-500 via-orange-500 to-blue-600 animate-gradient-text">
+                {text}<span className="text-blue-600 dark:text-blue-400 animate-pulse">|</span>
               </p>
             </div>
 
             <motion.p 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="text-[10px] md:text-base text-gray-600 dark:text-gray-400 max-w-lg leading-relaxed line-clamp-3 md:line-clamp-none"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-base md:text-lg text-gray-600 dark:text-gray-400 mb-6 max-w-xl lg:mx-0 mx-auto leading-relaxed"
             >
-              Dedicated 4th-year Nursing student at Debark University. Committed to compassionate patient care and healthcare innovation.
+              Dedicated 4th-year Nursing student at Debark University. Committed to providing compassionate patient care and advancing healthcare through innovation and community service.
             </motion.p>
 
-            {/* Hidden on very small screens to save space, shown on medium+ */}
-            <div className="hidden md:flex flex-wrap gap-4 pt-2">
-              {["Patient Care", "Emergency Support", "Community Health"].map((s) => (
-                <span key={s} className="flex items-center gap-1.5 text-[11px] font-medium text-gray-500">
-                  <div className="w-1 h-1 rounded-full bg-blue-500" /> {s}
-                </span>
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="flex flex-wrap justify-center lg:justify-start gap-3 mb-10"
+            >
+              {["Patient Care", "Emergency Support", "Community Health"].map((specialty) => (
+                <div key={specialty} className="flex items-center gap-1.5 text-xs md:text-sm font-medium text-gray-500 dark:text-gray-400">
+                  <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                  {specialty}
+                </div>
               ))}
-            </div>
+            </motion.div>
 
             <motion.div 
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="flex flex-col sm:flex-row gap-2 pt-2"
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center"
             >
-              <a href="#experience" className="px-3 py-2 md:px-5 md:py-2.5 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-all text-[10px] md:text-sm font-semibold flex items-center justify-center gap-1">
-                Experience <ArrowRight size={12} className="md:w-4 md:h-4" />
+              <a href="#experience" className="w-full sm:w-auto px-8 py-3.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all font-semibold text-base flex justify-center items-center gap-2">
+                View Experience <ArrowRight size={18} />
               </a>
               <button 
                 onClick={handleDownload}
-                className="px-3 py-2 md:px-5 md:py-2.5 border border-gray-200 dark:border-gray-800 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-50 dark:hover:bg-gray-900 transition-all text-[10px] md:text-sm font-semibold flex items-center justify-center gap-1"
+                className="w-full sm:w-auto px-8 py-3.5 border border-gray-200 dark:border-gray-800 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-900 transition-all font-semibold text-base flex justify-center items-center gap-2"
               >
-                <Download size={12} className="md:w-4 md:h-4" /> CV
+                <Download size={18} /> Download CV
               </button>
             </motion.div>
           </div>
 
-          {/* Right Side: Image Content (35% width on mobile) */}
+          {/* Image Side */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="w-[35%] lg:w-1/2 flex justify-end"
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="lg:w-1/2 flex justify-center lg:justify-end order-1 lg:order-2"
           >
-            <div className="relative group w-full max-w-[120px] md:max-w-xs">
-              <div className="relative aspect-[3/4] overflow-hidden rounded-xl border-2 md:border-4 border-white dark:border-gray-900 shadow-xl">
+            <div className="relative">
+              <motion.div 
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-[450px] lg:h-[450px] rounded-full overflow-hidden border-[8px] lg:border-[12px] border-white dark:border-gray-900 shadow-2xl"
+              >
+                <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-transparent z-10" />
                 <img 
                   src={AnketseProfile}
                   alt="Anketse Dereje" 
                   className="w-full h-full object-cover"
+                  loading="eager"
                 />
-              </div>
+              </motion.div>
+              
+              <div className="absolute -inset-4 bg-blue-500/10 dark:bg-blue-400/5 rounded-full blur-3xl -z-10 animate-pulse" />
+              
+              <motion.div 
+                animate={{ y: [0, 5, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -bottom-4 -left-4 lg:-bottom-6 lg:-left-6 bg-white dark:bg-gray-900 p-3 lg:p-5 rounded-xl lg:rounded-2xl shadow-xl border border-gray-100 dark:border-gray-800 flex items-center gap-3 lg:gap-4 z-20"
+              >
+                <div className="w-8 h-8 lg:w-12 lg:h-12 rounded-full bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400">
+                  <Heart size={20} className="lg:w-6 lg:h-6" />
+                </div>
+                <div>
+                  <p className="text-[8px] lg:text-[10px] text-gray-500 dark:text-gray-400 font-bold uppercase tracking-widest">Commitment</p>
+                  <p className="text-xs lg:text-base font-bold text-gray-900 dark:text-white">Patient Care</p>
+                </div>
+              </motion.div>
             </div>
           </motion.div>
-
         </div>
       </div>
+
+      {/* Scroll Indicator (Hidden on small mobile screens to save space) */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 1 }}
+        className="hidden sm:flex absolute bottom-6 lg:bottom-10 left-1/2 -translate-x-1/2 flex-col items-center gap-2"
+      >
+        <span className="text-[8px] lg:text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400 dark:text-gray-600">Scroll Down</span>
+        <motion.div 
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="w-4 h-7 lg:w-5 lg:h-8 border-2 border-gray-200 dark:border-gray-800 rounded-full flex justify-center p-1"
+        >
+          <div className="w-1 h-1 bg-blue-600 rounded-full" />
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
