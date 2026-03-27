@@ -142,7 +142,7 @@ export default function Hero() {
               >
                 <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-transparent z-10" />
                 <img 
-                  src="photo_2026-03-27_16-23-43.jpg" 
+                  src="https://github.com/tademf/anketse-dereje-portfolio/blob/main/photo_2026-03-27_16-23-43.jpg" 
                   alt="Anketse Dereje" 
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
