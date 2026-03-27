@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { Heart, Stethoscope, Activity, Thermometer, Download, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
-
+import AnketseProfile from "../assets/photo_2026-03-27_16-23-43.jpg";
 export default function Hero() {
   const [text, setText] = useState("");
   const fullText = "Patient Care | Compassion | Clinical Skills";
@@ -142,7 +142,7 @@ export default function Hero() {
               >
                 <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-transparent z-10" />
                 <img 
-                  src="photo_2026-03-27_16-23-43.jpg" 
+                  src={AnketseProfile}
                   alt="Anketse Dereje" 
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
